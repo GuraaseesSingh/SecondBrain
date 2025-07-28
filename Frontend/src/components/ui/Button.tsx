@@ -1,9 +1,14 @@
 interface ButtonProps {
-    name:string
+ variant: "primary"|"secondary";
+ text: string;
+ size: "sm"| "md" | "lg";
+ startIcon?: any;
+ endIcon?: any;
+ onClick: ()=> void;
 
 }
 
-export const Button: ButtonProps=()=>{
+export const Button=(props: ButtonProps)=>{
     return <div>
 
     </div>
