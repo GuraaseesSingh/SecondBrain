@@ -7,7 +7,10 @@ function App() {
 
   return (
     <>
-    <Button></Button>
+    <Button variant ="primary" text="Continue" size='lg' startIcon={<>+</>} 
+    onClick={()=>(alert("Button Clicked Paise daldo iske abb"))}></Button>  
+    <Button variant ="secondary" text="2ndue" size='sm' startIcon={<>-</>} 
+    onClick={()=>(alert("Button Clicked Paise nikalo iske abb"))}></Button>  
     </>
   )
 }
