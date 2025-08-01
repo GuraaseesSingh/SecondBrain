@@ -1,9 +1,11 @@
 import express from 'express'
 import jwt from "jsonwebtoken"
-import { ContentModel, UserModel } from './db';
+import { ContentModel, LinkModel, UserModel } from './db';
 import { jwtPassword } from './config';
 import { userMiddleware } from './middleware';
 import { hashPass, verifyPass } from './passwordHashing';
+import random from './linkgenerator';
+
 // import { hash } from 'bcrypt';
 
 // const bodyParser = require('body-parser')
@@ -134,18 +136,39 @@ app.delete("/api/v1/delete", userMiddleware,async (req,res)=>{
     }   
 })
 
-//brain share maybe creates a "share link" for someone's brain
-app.post("/api/v1/brain/share", userMiddleware,(req,res)=>{
-  
-
-    
+//brain share maybe creates a "share link" for someone's brain yes this is a link creation on click of share 
+app.post("/api/v1/brain/share", userMiddleware,async (req,res)=>{
+  const share = req.body.share //if share true we will generate a link unique for each user
+  if(share){
+    await LinkModel.create({
+      //@ts-ignore
+      userId:req.userId,
+        //@ts-ignore
+      hash:random(10)
+    })
+    res.status(200).json({
+      message:"Link to share Brain created"
+    })
+  }else{
+    await LinkModel.deleteOne({
+      //@ts-ignore
+      userId: req.userId
+    })
+  }  
 })
 
 //brain/:sharelink now the shared link is seen by someone else so here chances that the person is gone/accessign someone else's publically shared content
-app.get("/api/v1/brain/:shareLink", (req,res)=>{
-    
+app.get("/api/v1/brain/:shareLink",userMiddleware, async (req,res)=>{
+  const existing = await LinkModel.find({
+    //@ts-ignore
+    userId: req.userId
+  })
+  if(existing){
+    res.status(200).json({
+      message:`Link Exists  ${existing} `
+    })
+  }  
 })
-
 app.listen(PORT,()=>{ 
     console.log("Server connected at port 8080")
 })
