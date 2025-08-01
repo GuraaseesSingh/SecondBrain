@@ -136,6 +136,7 @@ app.delete("/api/v1/delete", userMiddleware,async (req,res)=>{
 
 //brain share maybe creates a "share link" for someone's brain
 app.post("/api/v1/brain/share", userMiddleware,(req,res)=>{
+  
 
     
 })
