@@ -31,6 +31,7 @@ app.post('/api/v1/signUp', async (req,res)=>{
         username: username,
         password:hashedPass
     })
+
     res.status(200).json({
         message:"User Signed up"
     })
@@ -91,7 +92,8 @@ app.post("/api/v1/content", userMiddleware,async (req,res)=>{
     res.status(200).json({
         message:"Content Added In Your Brain" 
     })
-})
+
+  })
 //to get the cotent
 app.get("/api/v1/content",userMiddleware,async (req,res)=>{
     //change schema and get username of person who posted that
@@ -106,8 +108,11 @@ app.delete("/api/v1/delete/:id", userMiddleware,async (req,res)=>{
     //@ts-ignore
       const itemId = req.params.id;
     //@ts-ignore
-
-    const retObj=await ContentModel.deleteOne({_id:itemId})
+    const retObj=await ContentModel.deleteOne({
+      _id:itemId,
+      //@ts-ignore
+     userId: req.userId 
+    })
     if(retObj.acknowledged){
         res.status(200).json({
             message:"Content deleted as per your command"
@@ -138,7 +143,8 @@ app.delete("/api/v1/delete", userMiddleware,async (req,res)=>{
 
 //brain share maybe creates a "share link" for someone's brain yes this is a link creation on click of share 
 app.post("/api/v1/brain/share", userMiddleware,async (req,res)=>{
-  const share = req.body.share //if share true we will generate a link unique for each user
+ try{
+   const share = req.body.share //if share true we will generate a link unique for each user
   if(share){
     await LinkModel.create({
       //@ts-ignore
@@ -154,7 +160,16 @@ app.post("/api/v1/brain/share", userMiddleware,async (req,res)=>{
       //@ts-ignore
       userId: req.userId
     })
-  }  
+    res.status(200).json({
+      message:"Token nahi diya or shareLink Deleted"
+    })
+  } 
+ }catch(e){
+  res.json({
+    message:"Duplicacy"
+  })
+ }
+
 })
 
 //brain/:sharelink now the shared link is seen by someone else so here chances that the person is gone/accessign someone else's publically shared content
