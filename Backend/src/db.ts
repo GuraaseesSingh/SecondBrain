@@ -18,7 +18,6 @@ const ContentSchema= new Schema({
 })
 export const ContentModel = model("Content",ContentSchema)
 const LinkSchema= new Schema({
-   
     hash:{type:String, unique:true},
     userId:{type:mongoose.Schema.Types.ObjectId, ref:'User', required:true, unique:true},
 })
