@@ -143,46 +143,71 @@ app.delete("/api/v1/delete", userMiddleware,async (req,res)=>{
 
 //brain share maybe creates a "share link" for someone's brain yes this is a link creation on click of share 
 app.post("/api/v1/brain/share", userMiddleware,async (req,res)=>{
- try{
+ 
    const share = req.body.share //if share true we will generate a link unique for each user
   if(share){
-    await LinkModel.create({
-      //@ts-ignore
-      userId:req.userId,
+    try{
+      const existingLink = await LinkModel.findOne({
         //@ts-ignore
-      hash:random(10)
-    })
-    res.status(200).json({
-      message:"Link to share Brain created"
-    })
-  }else{
+        userId:req.userId 
+      })
+      console.log(existingLink)
+      //@ts-ignore
+      if(existingLink){
+        res.status(200).json({
+          //@ts-ignore
+          message:"Hash already exsists",
+          hash:existingLink 
+        })
+        return;
+      }
+      const hash = random(10)
+      await LinkModel.create({
+        //@ts-ignore
+        userId:req.userId,
+        //@ts-ignore
+        hash:hash
+      })
+      res.status(200).json({
+        hash:existingLink
+      })
+      return
+    }catch(e){
+  res.json({
+    message:"JWT isn't Provided Duplicacy"
+  })
+  }
+}
+  //agar share : false hua
     await LinkModel.deleteOne({
       //@ts-ignore
       userId: req.userId
     })
     res.status(200).json({
-      message:"Token nahi diya or shareLink Deleted"
+      message:"ShareLink Deleted"
     })
-  } 
- }catch(e){
-  res.json({
-    message:"Duplicacy"
-  })
- }
-
 })
-
 //brain/:sharelink now the shared link is seen by someone else so here chances that the person is gone/accessign someone else's publically shared content
-app.get("/api/v1/brain/:shareLink",userMiddleware, async (req,res)=>{
-  const existing = await LinkModel.find({
+app.get("/api/v1/brain/:shareLink", async (req,res)=>{
+  const hash = req.params.shareLink
+  const link = await LinkModel.findOne({
     //@ts-ignore
-    userId: req.userId
+    hash: hash
   })
-  if(existing){
-    res.status(200).json({
-      message:`Link Exists  ${existing} `
+  if(!link){
+    res.status(411).json({
+      message:"Incorrect Brain id"
     })
-  }  
+    return;
+  }
+    const data = await UserModel.findOne({
+      //@ts-ignore
+      userId: link["userId"]
+      // userId: link.userId
+    })
+    res.status(200).json({
+      data: data
+    })
 })
 app.listen(PORT,()=>{ 
     console.log("Server connected at port 8080")
