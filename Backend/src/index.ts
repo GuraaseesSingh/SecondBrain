@@ -222,7 +222,6 @@ app.get("/api/v1/brain/:shareLink", async (req,res)=>{
       data: PublicBrainData
     })
 })
-
 app.listen(PORT,()=>{ 
     console.log("Server connected at port 8080")
 })
