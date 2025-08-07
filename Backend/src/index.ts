@@ -79,13 +79,18 @@ app.post('/api/v1/signIn', async (req, res) => {
 //to add content
 app.post("/api/v1/content", userMiddleware,async (req,res)=>{
     const link = req.body.link
-    const type = req.body.type
+    // const type = req.body.type
     const title = req.body.title
+    const tags = req.body.tags
+    console.log(tags)
+    
+    if (!title || !link) {
+        return res.status(400).json({ message: "Missing required fields" });
+    }
     await ContentModel.create({
         link,
-        type,
         title,
-        tags:[],
+        tags: [],
         //@ts-ignore
         userId:req.userId
     })
@@ -100,7 +105,7 @@ app.get("/api/v1/content",userMiddleware,async (req,res)=>{
     //@ts-ignore
     const id = req.userId
     console.log(req)
-    const data =await ContentModel.find({userId:id})
+    const data =await ContentModel.find({userId:id}).populate("userId", "username")
     res.status(200).send(data)
 })
 //delete
@@ -157,7 +162,7 @@ app.post("/api/v1/brain/share", userMiddleware,async (req,res)=>{
         res.status(200).json({
           //@ts-ignore
           message:"Hash already exsists",
-          hash:existingLink 
+          hash:"/brain/"+existingLink['hash'] 
         })
         return;
       }
@@ -169,7 +174,7 @@ app.post("/api/v1/brain/share", userMiddleware,async (req,res)=>{
         hash:hash
       })
       res.status(200).json({
-        hash:existingLink
+        hash:"/brain/"+hash
       })
       return
     }catch(e){
@@ -178,7 +183,7 @@ app.post("/api/v1/brain/share", userMiddleware,async (req,res)=>{
   })
   }
 }
-  //agar share : false hua
+  //agar share: false hua
     await LinkModel.deleteOne({
       //@ts-ignore
       userId: req.userId
@@ -202,13 +207,22 @@ app.get("/api/v1/brain/:shareLink", async (req,res)=>{
   }
     const data = await UserModel.findOne({
       //@ts-ignore
-      userId: link["userId"]
+      _id: link.userId.toString()
       // userId: link.userId
     })
+    // console.log(data)
+    if(data ===null){
+      res.json({message: "User not found"})
+      return
+    }
+     const PublicBrainData= await ContentModel.find({
+        userId:data._id
+      })
     res.status(200).json({
-      data: data
+      data: PublicBrainData
     })
 })
+
 app.listen(PORT,()=>{ 
     console.log("Server connected at port 8080")
 })
