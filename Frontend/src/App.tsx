@@ -3,19 +3,25 @@ import './App.css'
 import PlusIcon from './components/Icons/PlusIcon'
 import ShareIcon from './components/Icons/ShareIcon'
 import { Button } from './components/ui/Button'
+// import { Card } from './components/ui/Card'
+
 //working on Frontend 8/7/25 will finish it today
 function App() {
   return (
     <>
     <Button variant ="primary" text="Continue" size='lg' startIcon={< PlusIcon size={"lg"}  />} 
     onClick={()=>(alert("Button Clicked Paise daldo iske abb"))}></Button>  
-    <Button variant ="secondary" text="2ndue" size='sm' startIcon={< ShareIcon size="md"   />} 
+    <Button variant ="secondary" text="Share Brain" size='sm' startIcon={< ShareIcon size="md"   />} 
     onClick={()=>(alert("Button Clicked Paise nikalo iske abb"))}></Button>  
+
+    {/* <Card text ="hello" ></Card> */}
     </>
   )
 }
 
 export default App
+
+
 //try to same sm of button come to icons size as well
 //declare from global for ts ignore removal 
 //complete backend apis
