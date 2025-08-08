@@ -8,7 +8,7 @@ interface CardProps{
 }
 export default function Card(props: CardProps){
     return <div>
-        <span className="bg-white-900 rounded-md">
+        <span className="bg-white-900 rounded-md ">
             {props.text} hello
         </span>
     </div>
