@@ -3,7 +3,9 @@ import './App.css'
 import PlusIcon from './components/Icons/PlusIcon'
 import ShareIcon from './components/Icons/ShareIcon'
 import { Button } from './components/ui/Button'
-// import { Card } from './components/ui/Card'
+import { Card } from './components/ui/Card'
+
+const contentType = ['Youtube Video', 'Tweet', 'Docs', 'Others']
 
 //working on Frontend 8/7/25 will finish it today
 function App() {
@@ -13,8 +15,13 @@ function App() {
     onClick={()=>(alert("Button Clicked Paise daldo iske abb"))}></Button>  
     <Button variant ="secondary" text="Share Brain" size='sm' startIcon={< ShareIcon size="md"   />} 
     onClick={()=>(alert("Button Clicked Paise nikalo iske abb"))}></Button>  
-
-    {/* <Card text ="hello" ></Card> */}
+    <div className='flex p-2 m-2 gap-4'>
+      <Card type={contentType[0]} title="Recursion" link="https://www.youtube.com/live/y7XMDKwTQxY?feature=shared" text="Youtube Vid" ></Card>
+      <Card type={contentType[0]} title="Recursion" link="https://www.youtube.com/watch?v=l8X9nhgZyoA" text="Youtube Vid" ></Card>
+      <Card type={contentType[0]} title="kirtan" link="https://www.youtube.com/live/47lijcY9SZY" text="Youtube Vid" ></Card>
+      <Card type ={contentType[1]} title={contentType[1]} link="https://x.com/Guraasees_Singh/status/1948774810130993489" text={contentType[1]} ></Card>
+    
+    </div>
     </>
   )
 }
