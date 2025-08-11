@@ -11,7 +11,7 @@ interface CardProps{
 export function Card({type,title,link,text}: CardProps){
     return <div>
         <div className="pt-2 shadow-md bg-white-900 rounded-md max-w-72 border border-gray-200">
-            <div className=" p-1 m-1 p-1 flex justify-between">
+            <div className=" p-1 m-1 flex justify-between">
                 <div className="flex p-2 items-center text-md"> 
                    <div className="p-2 text-gray-500"> 
                     <ShareIcon size="md"></ShareIcon>
