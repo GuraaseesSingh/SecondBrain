@@ -4,6 +4,7 @@ import PlusIcon from './components/Icons/PlusIcon'
 import ShareIcon from './components/Icons/ShareIcon'
 import { Button } from './components/ui/Button'
 import { Card } from './components/ui/Card'
+import { CreateContentModel } from './components/ui/CreateContentModel'
 
 const contentType = ['Youtube Video', 'Tweet', 'Docs', 'Others']
 
@@ -11,6 +12,9 @@ const contentType = ['Youtube Video', 'Tweet', 'Docs', 'Others']
 function App() {
   return (
     <>
+
+    <CreateContentModel open={true} onClose={false} ></CreateContentModel>
+
     <Button variant ="primary" text="Continue" size='lg' startIcon={< PlusIcon size={"lg"}  />} 
     onClick={()=>(alert("Button Clicked Paise daldo iske abb"))}></Button>  
     <Button variant ="secondary" text="Share Brain" size='sm' startIcon={< ShareIcon size="md"   />} 
