@@ -29,15 +29,15 @@ export function Card({type,title,link,text}: CardProps){
 
 
             </div>
-            <div className="p-4">
+            <div className="p-4 flex flex-col items-center">
                 {text}
-                <div className="font-2xl italic font-mono ">
+                <div className="font-2xl italic font-mono m-2">
                     {title.toLocaleUpperCase()}
                 </div>
-                
-                {type==='Youtube Video' &&  <iframe className="w-full" src={link.replace('youtu.be/','www.youtube.com/').replace('watch?v=','embed/').replace('live/','embed/').replace('?feature=shared','')} title="YouTube video player" frameBorder="0" allow=" autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
-                }
-                   
+                {/* //Youtube Embed  */}
+                {type==='Youtube Video' &&  <iframe className="w-full m-2" src={link.replace('youtu.be/','www.youtube.com/').replace('watch?v=','embed/').replace('live/','embed/').replace('?feature=shared','')} title="YouTube video player" frameBorder="0" allow=" autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                }  
+                {/* Tweet */}
                 {type=== 'Tweet' && <blockquote className="twitter-tweet">
                  <a href={link.replace('x.com/', 'twitter.com/')}></a> 
                 </blockquote>
