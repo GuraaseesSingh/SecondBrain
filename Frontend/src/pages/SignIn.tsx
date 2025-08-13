@@ -20,7 +20,8 @@ export default function SignIn() {
           username,
           password
         })
-        console.log(response.data.token)
+        const token =response.data.token 
+        localStorage.setItem("token", token);
         navigate('/dashboard')
     }
   return (
