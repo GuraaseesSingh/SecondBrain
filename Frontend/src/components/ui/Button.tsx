@@ -6,6 +6,10 @@ interface ButtonProps {
  startIcon ?: ReactElement;
  endIcon ?: ReactElement;  //?. makes attribute to be optional 
  onClick?: ()=> void;
+ className?:string;
+ fullwidth?:boolean;
+ loaded?:boolean
+ disabled?:boolean
 }
 const variantStyles = {
     "primary":"bg-black-900 hover:bg-black-500  text-grey-200",
@@ -22,10 +26,16 @@ const sizeStyles={
 //use svg = scalable vector graphics doesn't fattna on zooming as it has path and eveything to know what's image unlike jpex jgeg and png which gets pixelated
 export const Button=(props:ButtonProps)=>{
     return <div>
-<button onClick={props.onClick} className={`${variantStyles[props.variant]} ${defaultStyles} ${sizeStyles[props.size] || sizeStyles.md} `} >
-   {props.startIcon ? <div className="pr-2"> {props.startIcon}</div> : null} 
-   {props.text} 
-   {props.endIcon}
+<button onClick={props.onClick}  type="submit" className={`${variantStyles[props.variant]} 
+    ${defaultStyles} 
+    ${sizeStyles[props.size] || sizeStyles.md} 
+    ${props.fullwidth ? " w-full justify-center items-center" : "" }
+    ${props.loaded ? " bg-slate-400 opacity-50 cursor-not-allowed " : " "}
+    ${props.disabled} `} >
+
+    {props.startIcon ? <div className="pr-2"> {props.startIcon}</div> : null} 
+    {props.text} 
+    {props.endIcon}
 </button>
 </div>
 }
