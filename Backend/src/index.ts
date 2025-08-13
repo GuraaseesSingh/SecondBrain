@@ -5,12 +5,14 @@ import { jwtPassword } from './config';
 import { userMiddleware } from './middleware';
 import { hashPass, verifyPass } from './passwordHashing';
 import random from './linkgenerator';
+const cors = require('cors')
 
 // import { hash } from 'bcrypt';
 
 // const bodyParser = require('body-parser')
 const app=express()
 const PORT =8080;
+app.use(cors());
 
 
 // app.use(bodyParser.json())
