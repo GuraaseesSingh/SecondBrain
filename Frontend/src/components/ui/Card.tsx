@@ -1,6 +1,7 @@
-// // import type { ReactElement } from "react";import ShareIcon from "../Icons/ShareIcon"
-
 import ShareIcon from "../Icons/ShareIcon";
+import TrashIcon from "../Icons/TrashIcon";
+import { TweetIcon } from "../Icons/TweetIcon";
+import YoutubeIcon from "../Icons/YoutubeIcon";
 
 interface CardProps {
   text?: string;
@@ -17,17 +18,18 @@ export function Card({ type, title, link, text }: CardProps) {
         {/* Header */}
         <div className="px-3 py-2 flex justify-between items-center border-b border-gray-100">
           <div className="flex items-center space-x-2 text-sm text-gray-600 font-medium">
-            <ShareIcon size="md" className="text-gray-500" />
+           {type === "Youtube Video" && <YoutubeIcon size="md"/>}
+           {type === "Tweet" && <TweetIcon size="md"/>}
             <span>{type}</span>
           </div>
           <div className="flex items-center space-x-1">
-            <ShareIcon size="md" className="text-gray-500 ml-2 cursor-pointer hover:text-gray-700" />
-            <ShareIcon size="md" className="text-gray-500 mr-2 pl-2 cursor-pointer hover:text-gray-700" />
+            <ShareIcon size="md" className="cursor-pointer hover:text-gray-700" />
+            <TrashIcon size="md" className="cursor-pointer hover:text-gray-700" />
           </div>
         </div>
 
         {/* Body */}
-        <div className="p-4 flex flex-col items-center text-center">
+        <div className="p-4 flex flex-col items-center flex-wrap text-center">
           {text && <p className="text-sm text-gray-500 mb-2">{text}</p>}
           <div className="text-lg font-bold italic font-mono mb-3">
             {title.toLocaleUpperCase()}

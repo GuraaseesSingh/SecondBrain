@@ -8,7 +8,7 @@ export default function ShareIcon(props: IconProps) {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={IconSizeVariant[props.size || "md"]}
+      className={`${props.className} ${IconSizeVariant[props.size || "md"]}`}
     >
       <path
         strokeLinecap="round"
