@@ -1,5 +1,5 @@
 
-export function Input({placeholder }) {
+export function Input({placeholder}) {
   return (
     <div className="m-2">
       <input

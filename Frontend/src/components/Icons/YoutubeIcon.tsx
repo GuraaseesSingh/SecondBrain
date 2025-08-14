@@ -1,8 +1,9 @@
 import { IconSizeVariant, type IconProps } from ".";
 
-export default function YoutubeIcon({size}:IconProps){
+export default function YoutubeIcon({size, className}:IconProps){
     return <svg xmlns="http://www.w3.org/2000/svg"
-     className={IconSizeVariant[size] || IconSizeVariant.lg}  
+    className={`${className} ${IconSizeVariant[size] || IconSizeVariant.lg}`}
+  
      width="800px"
      height="800px"
       viewBox="0 0 24 24"

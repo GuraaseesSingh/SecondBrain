@@ -18,8 +18,8 @@ export function Card({ type, title, link, text }: CardProps) {
         {/* Header */}
         <div className="px-3 py-2 flex justify-between items-center border-b border-gray-100">
           <div className="flex items-center space-x-2 text-sm text-gray-600 font-medium">
-           {type === "Youtube Video" && <YoutubeIcon size="md"/>}
-           {type === "Tweet" && <TweetIcon size="md"/>}
+           {type === "Youtube Video" && <YoutubeIcon className="cursor-pointer hover:text-gray-700" size="md"/>}
+           {type === "Tweet" && <TweetIcon className="cursor-pointer hover:text-gray-700" size="md"/>}
             <span>{type}</span>
           </div>
           <div className="flex items-center space-x-1">

@@ -19,6 +19,23 @@ export function CreateContentModel({open,onClose}){
             <div className="flex flex-col items-center mt-4">
                 <Input  placeholder ={"Title"}></Input>
                 <Input  placeholder ={"Link"}></Input>
+                {/* Dropdown for type */}
+                 <div className="w-full m-2">
+                  <select
+                    className="w-full px-3 py-2 rounded-md 
+                      bg-black-700 text-gray-800 font-mono
+                      border border-gray-600
+                      focus:border-blue-500 focus:ring-2 focus:ring-blue-500
+                      outline-none transition-all duration-200"
+                  >
+                    <option value="Youtube Video">Youtube Video</option>
+                    <option value="Tweet">Tweet</option>
+                    <option value="Docs">Docs</option>
+                    <option value="Others">Others</option>
+                  </select>
+                </div>
+
+
             <Button  variant = "secondary" text= "Add To Brain" size="lg"/>
             {/* <input type= "dropbox"/>  */}
             </div>

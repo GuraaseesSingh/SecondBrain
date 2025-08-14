@@ -1,5 +1,7 @@
 import { ChatIcon } from "../Icons/ChatIcon";
+import CommunityIcon from "../Icons/CommunityIcon";
 import { CourseIcon } from "../Icons/CourseIcon";
+import FireIcon from "../Icons/FireIcon";
 import PlusIcon from "../Icons/PlusIcon";
 import { TweetIcon } from "../Icons/TweetIcon";
 import YoutubeIcon from "../Icons/YoutubeIcon";
@@ -16,6 +18,8 @@ export function Sidebar(){
         <SidebarItem Icon={<CourseIcon size="lg"></CourseIcon>}   text="Courses" />
         <SidebarItem Icon={<YoutubeIcon size="lg"></YoutubeIcon>}   text="Youtube Vids" />
         <SidebarItem Icon={<PlusIcon size="lg"></PlusIcon>}   text="Brain Wire" />
+        <SidebarItem Icon={<FireIcon size="lg"></FireIcon>}   text="Popular Brains" />
+        <SidebarItem Icon={<CommunityIcon size="lg"></CommunityIcon>}   text="Community Brains" />
         </div>
     </div>
 }
