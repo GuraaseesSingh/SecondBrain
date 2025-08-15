@@ -7,19 +7,34 @@ import { TweetIcon } from "../Icons/TweetIcon";
 import YoutubeIcon from "../Icons/YoutubeIcon";
 import { SidebarItem } from "./SidebarItem";
 
-export function Sidebar(){
-    return <div className=" min-h-screen p-1 border-r border-spacing-1 border-slate-600 w-72 bg-gray-100 font-mono  fixed select-none ">
-        <div id="logo" className="border-red-50 p-3 m-3">
-            Logo aagya yaha 
-        </div>
-        <div className="py-4">
-        <SidebarItem Icon={<ChatIcon size="lg"></ChatIcon>}   text="Chat With Anything" />
-        <SidebarItem Icon={<TweetIcon size="lg"></TweetIcon>}   text="Tweets" />
-        <SidebarItem Icon={<CourseIcon size="lg"></CourseIcon>}   text="Courses" />
-        <SidebarItem Icon={<YoutubeIcon size="lg"></YoutubeIcon>}   text="Youtube Vids" />
-        <SidebarItem Icon={<PlusIcon size="lg"></PlusIcon>}   text="Brain Wire" />
-        <SidebarItem Icon={<FireIcon size="lg"></FireIcon>}   text="Popular Brains" />
-        <SidebarItem Icon={<CommunityIcon size="lg"></CommunityIcon>}   text="Community Brains" />
-        </div>
-    </div>
+export function Sidebar() {
+  return (
+    <aside
+      className="h-screen w-72 fixed flex flex-col 
+                 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900
+                 border-r border-gray-800 text-gray-200 select-none"
+    >
+      {/* Logo Section */}
+      <div className="p-6 border-b border-gray-800">
+        <h1 className="text-2xl font-bold tracking-tight text-white">🚀 MyApp</h1>
+        <p className="text-sm text-gray-200">Your second brain</p>
+      </div>
+
+      {/* Navigation */}
+      <nav className="flex flex-col gap-1 p-3 flex- text-gray-100">
+        <SidebarItem Icon={<ChatIcon size="lg" />} text="Chat With Anything" />
+        <SidebarItem Icon={<TweetIcon size="lg" />} text="Tweets" />
+        <SidebarItem Icon={<CourseIcon size="lg" />} text="Courses" />
+        <SidebarItem Icon={<YoutubeIcon size="lg" />} text="Youtube Vids" />
+        <SidebarItem Icon={<PlusIcon size="lg" />} text="Brain Wire" />
+        <SidebarItem Icon={<FireIcon size="lg" />} text="Popular Brains" />
+        <SidebarItem Icon={<CommunityIcon size="lg" />} text="Community Brains" />
+      </nav>
+
+      {/* Footer */}
+      <div className="p-4 border-t border-gray-800 text-xs text-gray-300">
+        © 2025 MyApp
+      </div>
+    </aside>
+  );
 }

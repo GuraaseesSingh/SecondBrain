@@ -3,21 +3,23 @@ import type { ReactElement } from "react";
 interface SideItemProps {
   Icon: ReactElement;
   text: string;
+  active?: boolean;
 }
 
-export function SidebarItem({ Icon, text }: SideItemProps) {
+export function SidebarItem({ Icon, text, active }: SideItemProps) {
   return (
     <div
-      className="flex items-center gap-3 px-4 py-3 rounded-md cursor-pointer 
-                 transition-all duration-200 hover:bg-gray-100 hover:shadow-sm
-                 active:scale-[0.98]"
+      className={`
+        flex items-center gap-3 px-4 py-3 rounded-lg cursor-pointer
+        transition-all duration-300 ease-in-out text-gray-100
+        ${active 
+          ? "bg-white text-indigo-600 shadow-sm" 
+          : "text-gray-900 hover:bg-gray-700 hover:text-white-900"
+        }
+      `}
     >
-      <span className="flex-shrink-0 text-gray-600 group-hover:text-gray-800">
-        {Icon}
-      </span>
-      <span className="font-mono text-lg text-gray-700 truncate">
-        {text}
-      </span>
+      <span className="flex-shrink-0 text-lg">{Icon}</span>
+      <span className="font-medium text-sm truncate">{text}</span>
     </div>
   );
 }
