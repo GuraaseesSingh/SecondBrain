@@ -15,13 +15,13 @@ export function Sidebar() {
                  border-r border-gray-800 text-gray-200 select-none"
     >
       {/* Logo Section */}
-      <div className="p-6 border-b border-gray-800">
-        <h1 className="text-2xl font-bold tracking-tight text-white">🚀 MyApp</h1>
+      <div className="p-6 border-b border-gray-500">
+        <h1 className="text-2xl font-bold tracking-tight text-white-900">🚀 MyApp</h1>
         <p className="text-sm text-gray-200">Your second brain</p>
       </div>
 
       {/* Navigation */}
-      <nav className="flex flex-col gap-1 p-3 flex- text-gray-100">
+      <nav className="flex flex-col gap-1 p-3 text-white-100">
         <SidebarItem Icon={<ChatIcon size="lg" />} text="Chat With Anything" />
         <SidebarItem Icon={<TweetIcon size="lg" />} text="Tweets" />
         <SidebarItem Icon={<CourseIcon size="lg" />} text="Courses" />
@@ -32,7 +32,7 @@ export function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="p-4 border-t border-gray-800 text-xs text-gray-300">
+      <div className="p-4 border-t border-gray-800 text-xs text-gray-200">
         © 2025 MyApp
       </div>
     </aside>
