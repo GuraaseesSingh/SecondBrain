@@ -62,7 +62,7 @@ export default function Dashboard() {
         }}
       />
       {/* <div className="pl-72 h-screen bg-white-900"> */}
-        <div className="pl-72 h-full 
+        <div className="md:pl-64 px-4 md:px-8 h-full 
                 bg-[radial-gradient(circle,#334155_1px,transparent_1px)] 
                 bg-[length:30px_30px] ">
         <div className="flex justify-end">
@@ -84,11 +84,34 @@ export default function Dashboard() {
           {content.map((item, idx) => (
             <Card
               key={idx}
+              id={item._id}
               type={item.type}
               title={item.title}
               link={item.link}
               text={item.text}
-              // onDelete={() =>handleDelete(item._id)}
+              onDelete={async (id) => {
+                if (!id) return;
+                const confirmed = confirm("Are you sure you want to delete this item?");
+                if (!confirmed) return;
+                try {
+                  await axios.delete(`${BackendURL}/delete/${id}`, {
+                    headers: { authorization: localStorage.getItem("token") },
+                  });
+                  setContent((prev) => prev.filter((c) => c._id !== id));
+                  alert("Item deleted.");
+                } catch (e) {
+                  alert("Failed to delete. Try again.");
+                }
+              }}
+              onShare={(link) => {
+                const actions = confirm("Copy link? OK to copy, Cancel to open.");
+                if (actions) {
+                  navigator.clipboard.writeText(link);
+                  alert("Link copied to clipboard.");
+                } else {
+                  window.open(link, "_blank");
+                }
+              }}
             />
           ))}
         </div>

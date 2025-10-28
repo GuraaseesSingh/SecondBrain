@@ -9,6 +9,9 @@ interface CardProps {
   type: string;
   title: string;
   link: string;
+  id?: string;
+  onDelete?: (id?: string) => void;
+  onShare?: (link: string) => void;
 }
 declare global {
   interface Window {
@@ -21,7 +24,7 @@ declare global {
 }
 
 
-export function Card({ type, title, link, text }: CardProps) {
+export function Card({ type, title, link, text, id, onDelete, onShare }: CardProps) {
 
   // Ensure Twitter embed script re-runs for new tweets
   useEffect(() => {
@@ -44,8 +47,12 @@ export function Card({ type, title, link, text }: CardProps) {
             <span>{type}</span>
           </div>
           <div className="flex items-center space-x-1">
-            <ShareIcon size="md" className="cursor-pointer hover:text-gray-700" />
-            <TrashIcon size="md" className="cursor-pointer hover:text-gray-700" />
+            <span onClick={() => onShare?.(link)}>
+              <ShareIcon size="md" className="cursor-pointer hover:text-gray-700" />
+            </span>
+            <span onClick={() => onDelete?.(id)}>
+              <TrashIcon size="md" className="cursor-pointer hover:text-gray-700" />
+            </span>
           </div>
         </div>
         {/* Body */}
