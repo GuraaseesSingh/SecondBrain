@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import PlusIcon from "../components/Icons/PlusIcon";
 import ShareIcon from "../components/Icons/ShareIcon";
 import { Button } from "../components/ui/Button";
@@ -21,6 +22,8 @@ interface ContentItem {
 export default function Dashboard() {
   const [modal, setModal] = useState(false);
   const [content, setContent] = useState<ContentItem[]>([]);
+  const location = useLocation();
+  const navigate = useNavigate();
   // const [share, setShare] = useState(false)
 
   useEffect(() => {
@@ -36,6 +39,16 @@ export default function Dashboard() {
     }
     fetchContent();
   }, []);
+
+  // Open modal when coming from navbar Add Link action via query param
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get("add") === "1") {
+      setModal(true);
+      // Clean the query param to avoid reopening on refresh/back
+      navigate("/dashboard", { replace: true });
+    }
+  }, [location.search, navigate]);
 
   return (
     <div>

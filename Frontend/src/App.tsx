@@ -4,11 +4,14 @@ import Dashboard from "./pages/Dashboard";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Logout from "./pages/Logout";
+import Community from "./pages/Community";
+import { Navbar } from "./components/ui/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export default function App(){
   return (
         <BrowserRouter>
+          <Navbar />
           <Routes>
             <Route path="/" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
@@ -17,6 +20,7 @@ export default function App(){
             <Route path="/dashboard" element={<AuthGuard><Dashboard /></AuthGuard>} />
             {/* Logout route clears token and redirects to signin */}
             <Route path="/logout" element={<AuthGuard><Logout /></AuthGuard>} />
+            <Route path="/community" element={<AuthGuard><Community /></AuthGuard>} />
 
 
           </Routes>
