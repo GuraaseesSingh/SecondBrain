@@ -26,12 +26,15 @@ const sizeStyles={
 //use svg = scalable vector graphics doesn't fattna on zooming as it has path and eveything to know what's image unlike jpex jgeg and png which gets pixelated
 export const Button=(props:ButtonProps)=>{
     return <div>
-<button onClick={props.onClick} type="button" className={`${variantStyles[props.variant]} 
+<button onClick={props.onClick} type="button" className={`
+    ${variantStyles[props.variant]} 
     ${defaultStyles} 
     ${sizeStyles[props.size] || sizeStyles.md} 
     ${props.fullwidth ? " w-full justify-center items-center" : "" }
     ${props.loaded ? " bg-slate-400 opacity-50 cursor-not-allowed " : " "}
-    ${props.disabled} `} >
+    ${props.disabled}
+    ${props.className || ""} 
+     `} >
 
     {props.startIcon ? <div className="pr-2"> {props.startIcon}</div> : null} 
     {props.text} 

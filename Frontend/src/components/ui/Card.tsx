@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import ShareIcon from "../Icons/ShareIcon";
 import TrashIcon from "../Icons/TrashIcon";
 import { TweetIcon } from "../Icons/TweetIcon";
@@ -9,10 +10,30 @@ interface CardProps {
   title: string;
   link: string;
 }
+declare global {
+  interface Window {
+    twttr?: {
+      widgets: {
+        load: (el?: HTMLElement) => void;
+      };
+    };
+  }
+}
+
 
 export function Card({ type, title, link, text }: CardProps) {
+
+  // Ensure Twitter embed script re-runs for new tweets
+  useEffect(() => {
+    if (type === "Tweet") {
+      
+      if(window.twttr && window.twttr.widgets) {
+        window.twttr.widgets.load();
+      }
+    }
+  }, [type, link]);
   return (
-    <div className="p-2">
+    <div className="p-2 bg-white-900 shadow-sm">
       <div className="shadow-md bg-white rounded-lg max-w-72 border border-gray-200 transition-transform duration-200 hover:shadow-lg hover:-translate-y-1">
         
         {/* Header */}
@@ -27,7 +48,6 @@ export function Card({ type, title, link, text }: CardProps) {
             <TrashIcon size="md" className="cursor-pointer hover:text-gray-700" />
           </div>
         </div>
-
         {/* Body */}
         <div className="p-4 flex flex-col items-center flex-wrap text-center">
           {text && <p className="text-sm text-gray-500 mb-2">{text}</p>}

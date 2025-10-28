@@ -53,7 +53,7 @@ app.post('/api/v1/signIn', async (req, res) => {
 
     if (!existingUser) {
       return res.status(403).json({
-        message: 'User not found. Please sign up first.'
+        message: 'User not found. Please sign-up to create an account'
       })
     }
     //@ts-ignore
@@ -84,22 +84,21 @@ app.post("/api/v1/content", userMiddleware,async (req,res)=>{
     // const type = req.body.type
     const title = req.body.title
     const tags = req.body.tags
+    const type = req.body.type
     console.log(tags)
     
     if (!title || !link) {
         return res.status(400).json({ message: "Missing required fields" });
-    }
-    await ContentModel.create({
-        link,
-        title,
-        tags: [],
-        //@ts-ignore
-        userId:req.userId
-    })
-    res.status(200).json({
-        message:"Content Added In Your Brain" 
-    })
-
+    }    
+  const newContent = await ContentModel.create({
+    link,
+    title,
+    type,
+    tags: tags || [],
+    // @ts-ignore
+    userId: req.userId,
+  });
+  res.status(200).json(newContent); // send back the created object
   })
 //to get the cotent
 app.get("/api/v1/content",userMiddleware,async (req,res)=>{

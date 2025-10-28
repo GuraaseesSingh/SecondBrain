@@ -20,7 +20,7 @@ export default function SignUp() {
           username,
           password
         })
-        alert("Done serrr")
+        alert("Account Created! Please SignIn")
         navigate('/signIn')
     }
   return (

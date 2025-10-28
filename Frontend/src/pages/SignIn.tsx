@@ -15,15 +15,24 @@ export default function SignIn() {
         setTimeout(() => setSubmit(false), 2000);
         const username = usernameRef.current?.value
         const password = passwordRef.current?.value
-        const response = await axios
-        .post(`${BackendURL}/signIn`,{
-          username,
-          password
-        })
-        const token =response.data.token 
+        try {
+            const response = await axios.post(`${BackendURL}/signIn`, { username,password});
+            console.log("✅ Signed in:", response);
+        const token = response.data.token;
         localStorage.setItem("token", token);
-        navigate('/dashboard')
+        navigate("/dashboard");
+  }catch( error:unknown){
+    if(axios.isAxiosError(error)){
+       console.error("Sign in failed:", error.response?.data?.message || error.message);
+       alert(`${ error.response?.data?.message || error.message}`)
+      // alert(error.response?.message || "Invalid username or password");
+    }else{
+      console.error("Unknown error:", error);
+      alert("Something went wrong. Try again later.");
     }
+
+  }
+}
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
@@ -69,4 +78,4 @@ export default function SignIn() {
       </div>
     </div>
   );
-}
+  }

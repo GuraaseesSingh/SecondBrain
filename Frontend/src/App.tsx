@@ -1,3 +1,5 @@
+// import { AuthGuard } from "./pages/AuthGaurd";
+import { AuthGuard } from "./pages/AuthGuard";
 import Dashboard from "./pages/Dashboard";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -11,6 +13,10 @@ export default function App(){
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            {/* <Route path="/dashboard" element={} /> */}
+            <Route path="/dashboard" element={<AuthGuard><Dashboard /></AuthGuard>} />
+
+
           </Routes>
         </BrowserRouter>
       
