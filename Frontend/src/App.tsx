@@ -6,21 +6,31 @@ import SignUp from "./pages/SignUp";
 import Logout from "./pages/Logout";
 import Community from "./pages/Community";
 import { Navbar } from "./components/ui/Navbar";
+import Tweets from "./pages/Tweets";
+import Courses from "./pages/Courses";
+import YouTube from "./pages/YouTube";
+import BrainWire from "./pages/BrainWire";
+import Popular from "./pages/PopularBrain";
+import { AppChrome } from "./components/ui/sidebar-demo";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export default function App(){
   return (
         <BrowserRouter>
-          <Navbar />
           <Routes>
             <Route path="/" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
             {/* Protected dashboard */}
-            <Route path="/dashboard" element={<AuthGuard><Dashboard /></AuthGuard>} />
+            <Route path="/dashboard" element={<AuthGuard><AppChrome><Dashboard /></AppChrome></AuthGuard>} />
             {/* Logout route clears token and redirects to signin */}
-            <Route path="/logout" element={<AuthGuard><Logout /></AuthGuard>} />
-            <Route path="/community" element={<AuthGuard><Community /></AuthGuard>} />
+            <Route path="/logout" element={<AuthGuard><AppChrome><Logout /></AppChrome></AuthGuard>} />
+            <Route path="/community" element={<AuthGuard><AppChrome><Community /></AppChrome></AuthGuard>} />
+            <Route path="/tweets" element={<AuthGuard><AppChrome><Tweets /></AppChrome></AuthGuard>} />
+            <Route path="/courses" element={<AuthGuard><AppChrome><Courses /></AppChrome></AuthGuard>} />
+            <Route path="/youtube" element={<AuthGuard><AppChrome><YouTube /></AppChrome></AuthGuard>} />
+            <Route path="/brain-wire" element={<AuthGuard><AppChrome><BrainWire /></AppChrome></AuthGuard>} />
+            <Route path="/popular" element={<AuthGuard><AppChrome><Popular /></AppChrome></AuthGuard>} />
 
 
           </Routes>
