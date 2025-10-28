@@ -3,6 +3,7 @@ import { AuthGuard } from "./pages/AuthGuard";
 import Dashboard from "./pages/Dashboard";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import Logout from "./pages/Logout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export default function App(){
@@ -12,9 +13,10 @@ export default function App(){
             <Route path="/" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            {/* <Route path="/dashboard" element={} /> */}
+            {/* Protected dashboard */}
             <Route path="/dashboard" element={<AuthGuard><Dashboard /></AuthGuard>} />
+            {/* Logout route clears token and redirects to signin */}
+            <Route path="/logout" element={<AuthGuard><Logout /></AuthGuard>} />
 
 
           </Routes>
