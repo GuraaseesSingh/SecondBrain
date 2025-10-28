@@ -5,6 +5,8 @@ import ShareIcon from "../components/Icons/ShareIcon";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
 import { CreateContentModel } from "../components/ui/CreateContentModel";
+import { CardDelete } from "../components/ui/CardDelete";
+import { ShareContent } from "../components/ui/ShareContent";
 import axios from "axios";
 import { BackendURL } from "../config";
 // import ShareBrain from "../components/ui/ShareBrain";
@@ -21,6 +23,10 @@ interface ContentItem {
 export default function Dashboard() {
   const [modal, setModal] = useState(false);
   const [content, setContent] = useState<ContentItem[]>([]);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [deleteTargetId, setDeleteTargetId] = useState<string | undefined>(undefined);
+  const [shareOpen, setShareOpen] = useState(false);
+  const [shareLink, setShareLink] = useState<string>("");
   const location = useLocation();
   const navigate = useNavigate();
   // const [share, setShare] = useState(false)
@@ -62,7 +68,7 @@ export default function Dashboard() {
         }}
       />
       {/* <div className="pl-72 h-screen bg-white-900"> */}
-        <div className="md:pl-64 px-4 md:px-8 h-full 
+        <div className="md:pl-64 px-2 md:px-6 h-full 
                 bg-[radial-gradient(circle,#334155_1px,transparent_1px)] 
                 bg-[length:30px_30px] ">
         <div className="flex justify-end">
@@ -80,7 +86,7 @@ export default function Dashboard() {
             startIcon={<ShareIcon size="md" />}
           />
         </div>
-        <div className="flex p-2 m-2 gap-4 flex-wrap">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 p-2">
           {content.map((item, idx) => (
             <Card
               key={idx}
@@ -89,32 +95,29 @@ export default function Dashboard() {
               title={item.title}
               link={item.link}
               text={item.text}
-              onDelete={async (id) => {
-                if (!id) return;
-                const confirmed = confirm("Are you sure you want to delete this item?");
-                if (!confirmed) return;
-                try {
-                  await axios.delete(`${BackendURL}/delete/${id}`, {
-                    headers: { authorization: localStorage.getItem("token") },
-                  });
-                  setContent((prev) => prev.filter((c) => c._id !== id));
-                  alert("Item deleted.");
-                } catch (e) {
-                  alert("Failed to delete. Try again.");
-                }
-              }}
-              onShare={(link) => {
-                const actions = confirm("Copy link? OK to copy, Cancel to open.");
-                if (actions) {
-                  navigator.clipboard.writeText(link);
-                  alert("Link copied to clipboard.");
-                } else {
-                  window.open(link, "_blank");
-                }
-              }}
+              onDelete={(id) => { setDeleteTargetId(id); setDeleteOpen(true); }}
+              onShare={(link) => { setShareLink(link); setShareOpen(true); }}
             />
           ))}
         </div>
+        {/* Delete Dialog */}
+        <CardDelete
+          open={deleteOpen}
+          onCancel={() => { setDeleteOpen(false); setDeleteTargetId(undefined); }}
+          onConfirm={async () => {
+            if (!deleteTargetId) return;
+            try {
+              await axios.delete(`${BackendURL}/delete/${deleteTargetId}`, {
+                headers: { authorization: localStorage.getItem("token") },
+              });
+              setContent((prev) => prev.filter((c) => c._id !== deleteTargetId));
+            } finally {
+              setDeleteOpen(false); setDeleteTargetId(undefined);
+            }
+          }}
+        />
+        {/* Share Dialog */}
+        <ShareContent open={shareOpen} link={shareLink} onClose={() => setShareOpen(false)} />
       </div>
     </div>
   );
