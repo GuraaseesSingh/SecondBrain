@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide scrollbars globally (keep smooth scroll) */
+html, body, #root {
+  scrollbar-width: none; /* Firefox */
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar, #root::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* Utility class to hide scrollbar on specific elements */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

@@ -10,9 +10,12 @@ export default function Community(){
   }, []);
 
   return (
-    <div className="mx-auto max-w-5xl p-4">
-      <h1 className="text-xl font-semibold mb-4">Community Brain</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="mx-auto max-w-6xl px-3 md:px-6 py-4 text-neutral-100">
+      <div className="flex items-center gap-2">
+        <h1 className="text-2xl font-bold">Community Brain</h1>
+        <span className="text-[10px] px-2 py-0.5 rounded bg-gray-800 text-gray-200 animate-pulse">Coming Soon</span>
+      </div>
+      <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {items.map((it, idx) => (
           <div key={idx} className="rounded-lg border border-gray-800 p-4 bg-gray-900/60 text-gray-200">
             <div className="text-sm text-gray-400">{it.type}</div>

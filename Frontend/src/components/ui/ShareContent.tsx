@@ -19,12 +19,20 @@ export function ShareContent({ open, title = "Share Content", link, onClose }: S
           <h3 className="text-sm font-semibold">{title}</h3>
           <button aria-label="Close" className="text-gray-400 hover:text-white" onClick={onClose}>✕</button>
         </div>
-        <div className="px-4 py-4 space-y-3">
+        <div className="px-4 py-4 space-y-4">
           <div className="text-sm text-gray-300">Copy or open the link.</div>
           <div className="flex items-center gap-2">
             <input className="flex-1 rounded-md bg-gray-800 border border-gray-700 px-3 py-2 text-sm" value={link} readOnly />
             <button onClick={handleCopy} className="px-3 py-2 rounded-md text-sm border border-gray-700 hover:bg-gray-800">Copy</button>
             <a href={link} target="_blank" rel="noreferrer" className="px-3 py-2 rounded-md text-sm bg-blue-600 hover:bg-blue-700 text-white">Open</a>
+          </div>
+          <div className="flex items-center gap-3">
+            <label className="text-xs text-gray-400">Expiration</label>
+            <select className="rounded-md bg-gray-800 border border-gray-700 px-2 py-1 text-sm">
+              <option>24 hours</option>
+              <option>7 days</option>
+              <option>Forever</option>
+            </select>
           </div>
         </div>
       </div>

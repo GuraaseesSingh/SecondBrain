@@ -16,8 +16,8 @@ const navItems: NavItem[] = [
   { to: "/courses", label: "Courses", icon: <GraduationCap size={18} /> },
   { to: "/youtube", label: "YouTube Vids", icon: <Youtube size={18} /> },
   { to: "/brain-wire", label: "+ Brain Wire", icon: <PlusSquare size={18} /> },
-  { to: "/popular", label: "Popular Brains", icon: <Flame size={18} /> },
-  { to: "/community", label: "Community Brains", icon: <Users size={18} /> }
+  { to: "/popular", label: "Popular Brains", icon: <Flame size={18} />, badge: "Soon" },
+  { to: "/community", label: "Community Brains", icon: <Users size={18} />, badge: "Soon" }
 ];
 
 export function SidebarDesktop() {
@@ -47,7 +47,7 @@ export function SidebarDesktop() {
         </Link>
       </div>
 
-      <nav className="p-2 flex-1 text-gray-300">
+      <nav className="p-2 flex-1 text-gray-300 overflow-y-auto scrollbar-hide">
         <ul className="space-y-1">
           {navItems.map((item) => (
             <li key={item.to}>
