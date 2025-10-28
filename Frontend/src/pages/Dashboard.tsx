@@ -5,7 +5,6 @@ import ShareIcon from "../components/Icons/ShareIcon";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
 import { CreateContentModel } from "../components/ui/CreateContentModel";
-import { Sidebar } from "../components/ui/Sidebar";
 import axios from "axios";
 import { BackendURL } from "../config";
 // import ShareBrain from "../components/ui/ShareBrain";
@@ -62,7 +61,6 @@ export default function Dashboard() {
           setModal(false);
         }}
       />
-      <Sidebar />
       {/* <div className="pl-72 h-screen bg-white-900"> */}
         <div className="pl-72 h-full 
                 bg-[radial-gradient(circle,#334155_1px,transparent_1px)] 
