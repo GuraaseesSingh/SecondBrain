@@ -81,10 +81,13 @@ export function Card({ type, title, link, text, id, onDelete, onShare }: CardPro
           )}
 
           {/* Tweet */}
+        
           {type === "Tweet" && (
-            <blockquote className="twitter-tweet">
-              <a href={link.replace("x.com/", "twitter.com/")}></a>
-            </blockquote>
+            <div className="w-full overflow-hidden">
+              <blockquote className="twitter-tweet w-full">
+                <a href={link.replace("x.com/", "twitter.com/")}></a>
+              </blockquote>
+            </div>
           )}
         </div>
       </div>

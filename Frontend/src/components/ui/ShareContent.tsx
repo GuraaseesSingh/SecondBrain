@@ -39,5 +39,3 @@ export function ShareContent({ open, title = "Share Content", link, onClose }: S
     </div>
   );
 }
-
-

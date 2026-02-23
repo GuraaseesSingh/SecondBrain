@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { MessageSquare, Star, GraduationCap, Youtube, PlusSquare, Users } from "lucide-react";
+import { MessageSquare, Star, Youtube, PlusSquare, Users } from "lucide-react";
 import { motion } from "framer-motion";
 
 const items = [

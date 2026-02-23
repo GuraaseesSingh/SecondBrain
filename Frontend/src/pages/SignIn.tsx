@@ -17,7 +17,7 @@ export default function SignIn() {
         const password = passwordRef.current?.value
         try {
             const response = await axios.post(`${BackendURL}/signIn`, { username,password});
-            console.log("✅ Signed in:", response);
+            // console.log(" Signed in:", response);
         const token = response.data.token;
         localStorage.setItem("token", token);
         navigate("/dashboard");
